@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<section class="content">
+  <div class="header">
+    <div class="inner_header">
+      <div class="logo_container">
+        <h1>E<span>dit</span></h1>
+      </div>
+    </div>
+  </div>
+  <section class="post_form">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input
+        class="Name"
+        type="text"
+        name="name"
+        placeholder="Name"
+        value="{{post.name}}"
+        required
+      />
+      <textarea
+        class="textarea"
+        name="body"
+        placeholder="Enter a Message..."
+        required
+      >
+{{post.body}}</textarea
+      >
+      <img class="post-img" src="{{post.image.url}}" alt="" />
+
+      <form name="" method="" action="">
+        <input name="image" type="file" accept="image/*" />
+        <div class="btn">
+            <a href="/">
+          <input class="submit" type="button" value="Cancel" />
+        </a>
+   
+            <input class="submit" type="submit" value="Update" />
+ 
+        </div>
+      </form>
+    </form>
+  </section>
+</section>
+{% endblock %}

@@ -1,11 +1,30 @@
 {% extends "base.html" %} {% block content %} {% load static %}
 <section class="content">
+  <div class="header">
+    <div class="inner_header">
+      <div class="logo_container">
+        <h1>T<span>Clone</span></h1>
+      </div>
+    </div>
+  </div>
   <section class="post_form">
-    <form action="/" method="POST">
+    <form action="/" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <input type="text" name="name" placeholder="Name" required />
-      <textarea name="body" placeholder="Tell us anything" required></textarea>
-      <input type="submit" value="Post" />
+      <input class="Name" type="text" name="name" placeholder="Name" required />
+      <textarea
+        class="textarea"
+        name="body"
+        placeholder="Enter a Message..."
+        required
+      ></textarea>
+
+      <form name="" method="" action="">
+        <input name="image" type="file" accept="image/*">
+
+        <input class="submit" type="submit" value="Post" />
+
+      </form>
+       
     </form>
   </section>
   <section class="posts">
@@ -18,14 +37,22 @@
         <img class="menu_icon js-menu-icon" src="{% static 'img/menu.png' %}" />
         <div class="menu">
           <a href="/delete/{{ post.id }}">Delete</a>
+          <a href="/edit/{{ post.id }}">Edit</a>
         </div>
         <div class="logo">
-          <img src="{% static 'img/user.png' %}" />
+          <img src="{% static 'img/profile-pic.png' %}" />
         </div>
         <div class="name_body">
           <div class="name">{{ post.name }}</div>
           <div class="datetime">{{ post.created_at }}</div>
           <p>{{ post.body }}</p>
+          <img class="post-img" src="{{post.image.url}}" alt="">
+          <div class="like">
+            <a href="like/{{post.id}}">
+            <img src="{% static 'img/like.png' %}" alt="">
+          </a>
+            <p>{{post.like}}</p>
+          </div>
         </div>
       </li>
       {% endfor %}
